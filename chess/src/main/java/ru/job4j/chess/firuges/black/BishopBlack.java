@@ -15,11 +15,27 @@ public class BishopBlack implements Figure {
         return this.position;
     }
 
+    /**
+     * Правила хода слона
+     * Пока не понятно почему
+     * steps[i] = Cell.values()[8 * x + y]
+     * возможно подобрано по порядку значений
+     */
     @Override
     public Cell[] way(Cell source, Cell dest) {
-        throw new IllegalStateException(
-                String.format("Could not way by diagonal from %s to %s", source, dest)
-        );
+        Cell[] steps = new Cell[0];
+        if (this.isDiagonal(source, dest)) {
+            int signX = source.x > dest.x ? -1 : 1;
+            int signY = source.y > dest.y ? -1 : 1;
+            int size = Math.abs(source.x - dest.x);
+            steps = new Cell[size];
+            for (int i = 0; i < size; i++) {
+                int x = source.x + (i + 1) * signX;
+                int y = source.y + (i + 1) * signY;
+                steps[i] = Cell.values()[8 * x + y];
+            }
+        }
+        return steps;
     }
 
     public boolean isDiagonal(Cell source, Cell dest) {
