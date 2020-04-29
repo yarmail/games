@@ -52,7 +52,7 @@ public class Logic3T {
     }
 
     /**
-     *  Содержатся пустые клетки?
+     *  Есть ли пустые клетки
      */
     public boolean hasGap() {
         return  Arrays.stream(this.table)
